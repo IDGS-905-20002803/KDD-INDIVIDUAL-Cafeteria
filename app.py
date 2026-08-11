@@ -9,16 +9,24 @@ import dash
 from dash import dcc, html, Input, Output
 
 
-# 1. CONEXIONES A LAS DOS BASES DE DATOS
+
+from sqlalchemy import create_engine
 
 USUARIO = "avnadmin"
-PASSWORD = "AVNS_B-5xRIf0MrNHW_zHMX1"
+PASSWORD = "AVNS_B-5xRIf0MrNHW_zHMX1"          
 HOST = "mysql-cafeteria-kddindividual.k.aivencloud.com"
 PORT = "17967"
-engine_prod   = create_engine(f"mysql+pymysql://{USUARIO}:{PASSWORD}@{HOST}/SistemaCafeteria_Produccion")
-engine_result = create_engine(f"mysql+pymysql://{USUARIO}:{PASSWORD}@{HOST}/SistemaCafeteria_Resultados")
 
+# Conexión correcta con SSL para Aiven
+engine_prod = create_engine(
+    f"mysql+pymysql://{USUARIO}:{PASSWORD}@{HOST}:{PORT}/SistemaCafeteria_Produccion",
+    connect_args={"ssl": {"ssl_mode": "REQUIRED"}}
+)
 
+engine_result = create_engine(
+    f"mysql+pymysql://{USUARIO}:{PASSWORD}@{HOST}:{PORT}/SistemaCafeteria_Resultados",
+    connect_args={"ssl": {"ssl_mode": "REQUIRED"}}
+)
 def procesar_kdd():
     query = """
     SELECT
