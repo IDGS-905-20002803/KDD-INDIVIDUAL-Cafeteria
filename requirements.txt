@@ -1,0 +1,7 @@
+dash
+plotly
+pandas
+sqlalchemy
+pymysql
+gunicorn
+numpy

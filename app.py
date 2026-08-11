@@ -127,7 +127,7 @@ def tarjeta(titulo_obj, gid, fig, asistente):
 
 
 app = dash.Dash(__name__, title="Cafetería — Panel de Objetivos KDD")
-
+server = app.server
 app.layout = html.Div(style=ESTILO_APP, children=[
 
     # NAVBAR
@@ -562,3 +562,4 @@ def render_tab(tab, anio_v, categoria_v):
 if __name__ == '__main__':
     Timer(1, lambda: webbrowser.open_new("http://127.0.0.1:5000/")).start()
     app.run(debug=False, port=5000)
+    
